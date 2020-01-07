@@ -32,6 +32,11 @@ allprojects {
     toolVersion '8.27'
     checkstyleTest.enabled = false
   }
+
+  java {
+    withSourcesJar()
+    withJavadocJar()
+  }
 }
 
 task codeCoverageReport(type: JacocoReport) {
