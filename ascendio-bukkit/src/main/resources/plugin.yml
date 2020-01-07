@@ -1,0 +1,9 @@
+name: Ascendio
+version: 1.0.0
+main: com.mysteryworlds.ascendio.bukkit.AscendioPlugin
+
+description: Advanced quest modelling framework.
+
+api-version: "1.15"
+author: Mysteryworlds
+prefix: Ascendio

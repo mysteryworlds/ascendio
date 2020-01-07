@@ -1,0 +1,5 @@
+dependencies {
+  implementation 'org.bstats:bstats-bukkit:1.5'
+  implementation 'com.google.inject:guice:4.2.2'
+  implementation 'org.spigotmc:spigot-api:1.15-R0.1-SNAPSHOT'
+}
