@@ -10,6 +10,9 @@ allprojects {
   apply plugin: 'checkstyle'
   apply plugin: 'maven-publish'
 
+  group = 'com.mysteryworlds.ascendio'
+  version = '1.0.0-SNAPSHOT'
+
   repositories {
     google()
     mavenLocal()
