@@ -2,6 +2,7 @@ allprojects {
   apply plugin: 'java'
   apply plugin: 'java-library'
   apply plugin: 'jacoco'
+  apply plugin: 'checkstyle'
 
   repositories {
     google()
@@ -18,6 +19,13 @@ allprojects {
 
   test {
     useJUnitPlatform()
+  }
+
+  checkstyle {
+    maxWarnings = 0
+    ignoreFailures = false
+    toolVersion '8.27'
+    checkstyleTest.enabled = false
   }
 }
 
