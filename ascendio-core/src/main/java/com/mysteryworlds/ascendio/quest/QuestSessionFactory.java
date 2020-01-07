@@ -10,13 +10,14 @@ public final class QuestSessionFactory {
     this.sessionRegistry = sessionRegistry;
   }
 
-  public QuestSession createSession(Quest quest, QuestPlayer player) {
+  QuestSession createSession(Quest quest, QuestPlayer player) {
     Preconditions.checkNotNull(quest);
     Preconditions.checkNotNull(player);
     return new QuestSession(
       quest,
       player,
-      status, Lists.newArrayList(),
+      QuestSessionStatus.RUNNING,
+      Lists.newArrayList(),
       sessionRegistry
     );
   }
