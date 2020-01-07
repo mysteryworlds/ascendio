@@ -8,6 +8,7 @@ allprojects {
   apply plugin: 'java-library'
   apply plugin: 'jacoco'
   apply plugin: 'checkstyle'
+  apply plugin: 'maven-publish'
 
   repositories {
     google()
@@ -36,6 +37,25 @@ allprojects {
   java {
     withSourcesJar()
     withJavadocJar()
+  }
+
+  publishing {
+    publications {
+      maven(MavenPublication) {
+        from(components.java)
+      }
+    }
+    repositories {
+      maven {
+        def releasesRepoUrl = 'https://repository.klauke-enterprises.com/repository/maven-releases/'
+        def snapshotsRepoUrl = 'https://repository.klauke-enterprises.com/repository/maven-snapshots/'
+        url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        credentials {
+          username = System.getenv('NEXUS_USERNAME')
+          password = System.getenv('NEXUS_PASSWORD')
+        }
+      }
+    }
   }
 }
 

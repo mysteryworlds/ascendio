@@ -2,7 +2,7 @@ plugins {
   id "com.gradle.enterprise" version "3.1"
 }
 
-rootProject.name = 'ascendio-apply'
+rootProject.name = 'ascendio-parent'
 
 rootProject.children.each { project ->
   project.buildFileName = "${project.name}.gradle"
