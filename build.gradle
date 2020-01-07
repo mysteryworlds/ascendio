@@ -1,3 +1,8 @@
+buildScan {
+  termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+  termsOfServiceAgree = 'yes'
+}
+
 allprojects {
   apply plugin: 'java'
   apply plugin: 'java-library'
