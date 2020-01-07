@@ -9,6 +9,7 @@ public final class Quest {
   private final String name;
   private final String description;
   private final List<QuestObjective> objectives;
+  private final List<QuestReward> rewards;
   private final QuestSessionFactory sessionFactory;
 
   Quest(
@@ -16,12 +17,14 @@ public final class Quest {
     String name,
     String description,
     List<QuestObjective> objectives,
+    List<QuestReward> rewards,
     QuestSessionFactory sessionFactory
   ) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.objectives = objectives;
+    this.rewards = rewards;
     this.sessionFactory = sessionFactory;
   }
 
@@ -44,5 +47,9 @@ public final class Quest {
 
   public List<QuestObjective> objectives() {
     return List.copyOf(objectives);
+  }
+
+  public List<QuestReward> rewards() {
+    return List.copyOf(rewards);
   }
 }

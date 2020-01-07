@@ -29,4 +29,9 @@ public final class QuestSessionRegistry {
   public static QuestSessionRegistry empty() {
     return new QuestSessionRegistry(Sets.newConcurrentHashSet());
   }
+
+  void remove(QuestSession session) {
+    Preconditions.checkNotNull(session);
+    sessions.remove(session);
+  }
 }

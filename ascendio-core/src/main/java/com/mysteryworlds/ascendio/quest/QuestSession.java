@@ -47,8 +47,21 @@ public final class QuestSession implements Closeable {
       .collect(Collectors.toUnmodifiableList());
   }
 
+  public void cancel() {
+    status = QuestSessionStatus.CANCELLED;
+  }
+
   @Override
   public void close() {
+    awardRewards();
     status = QuestSessionStatus.FINISHED;
+    sessionRegistry.remove(this);
+  }
+
+  private void awardRewards() {
+    var rewards = quest.rewards();
+    for (QuestReward reward : rewards) {
+      reward.award(player);
+    }
   }
 }
