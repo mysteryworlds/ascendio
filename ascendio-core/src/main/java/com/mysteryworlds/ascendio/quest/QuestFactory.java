@@ -100,8 +100,6 @@ public final class QuestFactory {
       Preconditions.checkNotNull(id);
       Preconditions.checkNotNull(name);
       Preconditions.checkNotNull(description);
-      Preconditions.checkNotNull(objectives);
-      Preconditions.checkNotNull(rewards);
       Preconditions.checkNotNull(guard);
       return new Quest(
         id,

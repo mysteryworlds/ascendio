@@ -25,16 +25,6 @@ public final class QuestSessionFactory {
     return session;
   }
 
-  private void ensureSessionAbsence(Quest quest, QuestPlayer player)
-    throws QuestSessionAlreadyExistsException {
-    var sessions = sessionRegistry.findByQuest(quest);
-    var sessionExists = sessions.stream()
-      .anyMatch(session -> session.player() == player);
-    if (sessionExists) {
-      throw QuestSessionAlreadyExistsException.withMessage("Session already exists");
-    }
-  }
-
   private QuestSession createSession(
     Quest quest,
     QuestPlayer player,
@@ -47,5 +37,16 @@ public final class QuestSessionFactory {
       reachedObjectives,
       sessionRegistry
     );
+  }
+
+  private void ensureSessionAbsence(Quest quest, QuestPlayer player)
+    throws QuestSessionAlreadyExistsException {
+    var sessions = sessionRegistry.findByQuest(quest);
+    var sessionExists = sessions.stream()
+      .anyMatch(session -> session.player() == player);
+    if (sessionExists) {
+      throw QuestSessionAlreadyExistsException
+        .withMessage("Session already exists");
+    }
   }
 }
