@@ -8,13 +8,13 @@ public final class QuestModule extends AbstractModule {
   private QuestModule() {
   }
 
+  public static QuestModule create() {
+    return new QuestModule();
+  }
+
   @Provides
   @Singleton
   QuestSessionRegistry provideSessionRegistry() {
     return QuestSessionRegistry.empty();
-  }
-
-  public static QuestModule create() {
-    return new QuestModule();
   }
 }

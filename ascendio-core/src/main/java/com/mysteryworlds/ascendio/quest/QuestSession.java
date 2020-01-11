@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 public final class QuestSession implements Closeable {
   private final Quest quest;
   private final QuestPlayer player;
-  private QuestSessionStatus status;
   private final List<QuestObjective> reachedObjectives;
   private final QuestSessionRegistry sessionRegistry;
+  private QuestSessionStatus status;
 
   QuestSession(
     Quest quest,

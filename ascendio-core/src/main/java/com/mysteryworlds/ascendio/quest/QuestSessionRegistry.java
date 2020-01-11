@@ -12,6 +12,10 @@ public final class QuestSessionRegistry {
     this.sessions = sessions;
   }
 
+  public static QuestSessionRegistry empty() {
+    return new QuestSessionRegistry(Sets.newConcurrentHashSet());
+  }
+
   public Set<QuestSession> findByPlayer(QuestPlayer player) {
     Preconditions.checkNotNull(player);
     return sessions.stream()
@@ -24,10 +28,6 @@ public final class QuestSessionRegistry {
     return sessions.stream()
       .filter(questSession -> questSession.quest().equals(quest))
       .collect(Collectors.toUnmodifiableSet());
-  }
-
-  public static QuestSessionRegistry empty() {
-    return new QuestSessionRegistry(Sets.newConcurrentHashSet());
   }
 
   void remove(QuestSession session) {
