@@ -34,4 +34,9 @@ public final class QuestSessionRegistry {
     Preconditions.checkNotNull(session);
     sessions.remove(session);
   }
+
+  void register(QuestSession session) {
+    Preconditions.checkNotNull(session);
+    sessions.add(session);
+  }
 }

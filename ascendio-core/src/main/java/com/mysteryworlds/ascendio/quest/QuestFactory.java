@@ -20,7 +20,8 @@ public final class QuestFactory {
       sessionFactory,
       UUID.randomUUID(),
       Lists.newArrayList(),
-      Lists.newArrayList()
+      Lists.newArrayList(),
+      EmptyQuestGuard.create()
     );
   }
 
@@ -31,17 +32,20 @@ public final class QuestFactory {
     private String description;
     private Collection<QuestObjective> objectives;
     private Collection<QuestReward> rewards;
+    private QuestGuard guard;
 
     private Builder(
       QuestSessionFactory sessionFactory,
       UUID id,
       Collection<QuestObjective> objectives,
-      Collection<QuestReward> rewards
+      Collection<QuestReward> rewards,
+      QuestGuard guard
     ) {
       this.sessionFactory = sessionFactory;
       this.id = id;
       this.objectives = objectives;
       this.rewards = rewards;
+      this.guard = guard;
     }
 
     public Builder withId(UUID id) {
@@ -86,19 +90,27 @@ public final class QuestFactory {
       return this;
     }
 
+    public Builder withGuard(QuestGuard guard) {
+      Preconditions.checkNotNull(guard);
+      this.guard = guard;
+      return this;
+    }
+
     public Quest create() {
       Preconditions.checkNotNull(id);
       Preconditions.checkNotNull(name);
       Preconditions.checkNotNull(description);
       Preconditions.checkNotNull(objectives);
       Preconditions.checkNotNull(rewards);
+      Preconditions.checkNotNull(guard);
       return new Quest(
         id,
         name,
         description,
         List.copyOf(objectives),
         List.copyOf(rewards),
-        sessionFactory
+        sessionFactory,
+        guard
       );
     }
   }

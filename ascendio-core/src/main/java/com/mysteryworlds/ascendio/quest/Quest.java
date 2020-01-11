@@ -11,6 +11,7 @@ public final class Quest {
   private final List<QuestObjective> objectives;
   private final List<QuestReward> rewards;
   private final QuestSessionFactory sessionFactory;
+  private final QuestGuard guard;
 
   Quest(
     UUID id,
@@ -18,7 +19,8 @@ public final class Quest {
     String description,
     List<QuestObjective> objectives,
     List<QuestReward> rewards,
-    QuestSessionFactory sessionFactory
+    QuestSessionFactory sessionFactory,
+    QuestGuard guard
   ) {
     this.id = id;
     this.name = name;
@@ -26,23 +28,22 @@ public final class Quest {
     this.objectives = objectives;
     this.rewards = rewards;
     this.sessionFactory = sessionFactory;
+    this.guard = guard;
   }
 
-  public QuestSession start(QuestPlayer player) {
+  public QuestSession start(
+    QuestPlayer player
+  ) throws QuestRequirementsException, QuestSessionAlreadyExistsException {
     Preconditions.checkNotNull(player);
+    ensureQuestRequirements(player);
     return sessionFactory.createSession(this, player);
   }
 
-  public UUID id() {
-    return id;
-  }
-
-  public String name() {
-    return name;
-  }
-
-  public String description() {
-    return description;
+  private void ensureQuestRequirements(QuestPlayer player)
+    throws QuestRequirementsException {
+    if (!guard.test(player)) {
+      throw QuestRequirementsException.withMessage("Requirements not met");
+    }
   }
 
   public List<QuestObjective> objectives() {

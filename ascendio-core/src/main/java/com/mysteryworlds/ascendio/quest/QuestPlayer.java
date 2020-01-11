@@ -10,10 +10,6 @@ public final class QuestPlayer {
     this.id = id;
   }
 
-  public UUID id() {
-    return id;
-  }
-
   public static QuestPlayer withId(UUID id) {
     Preconditions.checkNotNull(id);
     return new QuestPlayer(id);
