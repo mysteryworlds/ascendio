@@ -37,10 +37,6 @@ public final class QuestSession implements Closeable {
     return status;
   }
 
-  public QuestProgress progress() {
-    return null;
-  }
-
   public List<QuestObjective> remainingObjectives() {
     return quest.objectives().stream()
       .filter(reachedObjectives::contains)

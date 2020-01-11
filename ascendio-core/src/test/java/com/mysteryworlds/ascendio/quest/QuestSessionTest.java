@@ -48,6 +48,20 @@ final class QuestSessionTest {
   }
 
   @Test
+  void testCancelSession()
+    throws QuestSessionAlreadyExistsException, QuestRequirementsException {
+    var quest = questFactory.createBuilder()
+      .withDescription("Standardquest")
+      .withName("Standardquest")
+      .withId(UUID.randomUUID())
+      .create();
+    var player = QuestPlayer.withId(UUID.randomUUID());
+    var session = quest.start(player);
+    session.cancel();
+    assertEquals(QuestSessionStatus.CANCELLED, session.status());
+  }
+
+  @Test
   void testRewardAwarding() throws QuestSessionAlreadyExistsException, QuestRequirementsException {
     var reward = new EmptyReward();
     var quest = questFactory.createBuilder()

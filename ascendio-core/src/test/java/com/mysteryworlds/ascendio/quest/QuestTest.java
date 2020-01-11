@@ -47,6 +47,7 @@ final class QuestTest {
       .withName("Standardquest")
       .setObjectives(Lists.newArrayList())
       .setRewards(Lists.newArrayList())
+      .withObjective(new EmptyQuestObjective())
       .create();
     var player = QuestPlayer.withId(UUID.randomUUID());
     var session = quest.start(player);
@@ -68,5 +69,8 @@ final class QuestTest {
 
     Executable executable = () -> quest.start(player);
     assertThrows(QuestSessionAlreadyExistsException.class, executable);
+  }
+
+  private static final class EmptyQuestObjective implements QuestObjective {
   }
 }
